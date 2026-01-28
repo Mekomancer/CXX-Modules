@@ -14,6 +14,8 @@ project(cxx_module_exec
   LANGUAGES CXX
 )
 
+find_package(myu)
+
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
@@ -44,3 +46,5 @@ target_compile_definitions(${PROJECT_NAME}
   VERSION=\"${PROJECT_VERSION}\"
   NAME=\"${PROJECT_NAME}\"
 )
+
+target_link_libraries(cxx_module_exec myu)
