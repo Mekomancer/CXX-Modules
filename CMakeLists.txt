@@ -14,7 +14,6 @@ project(cxx_module_exec
   LANGUAGES CXX
 )
 
-find_package(mui)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
@@ -24,6 +23,7 @@ endif()
 
 add_executable(cxx_module_exec
   src/main.cpp
+  src/cmdline.cxx
 )
 
 target_sources(cxx_module_exec
@@ -31,12 +31,13 @@ target_sources(cxx_module_exec
   FILE_SET CXX_MODULES
   BASE_DIRS src
   FILES
+  src/cmdline.ixx
   src/types.ixx
 )
 
 add_custom_target(format 
-  COMMAND clang-format -i 
-  \`find ${CMAKE_SOURCE_DIR}/src -name '*.cxx' -o -name '*.cpp' -o -name '*.ixx'\`
+  COMMAND clang-format -i \`find ${CMAKE_SOURCE_DIR}/src 
+  -name '*.cxx' -o -name '*.cpp' -o -name '*.ixx'\`
   COMMAND_EXPAND_LISTS
 )
 
@@ -46,4 +47,4 @@ target_compile_definitions(${PROJECT_NAME}
   NAME=\"${PROJECT_NAME}\"
 )
 
-target_link_libraries(cxx_module_exec mui)
+target_link_libraries(cxx_module_exec)
